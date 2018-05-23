@@ -2,9 +2,9 @@ USE employees;
 
 SELECT *
 FROM employees
-WHERE first_name = 'Irena' AND gender = 'm'
-      OR first_name = 'vidya' AND gender = 'm'
-      OR first_name = 'maya' AND gender = 'm';
+WHERE (first_name = 'Irena'
+      OR first_name = 'vidya'
+      OR first_name = 'maya') AND gender = 'm';
 SELECT *
 FROM employees
 WHERE last_name LIKE '%e' OR last_name LIKE 'e%';
