@@ -13,7 +13,7 @@ WHERE last_name LIKE '%e';
 
 SELECT *
 FROM employees
-WHERE last_name LIKE '%e';
+WHERE last_name LIKE 'e%e';
 
 SELECT *
 FROM employees
