@@ -18,7 +18,8 @@ WHERE last_name LIKE '%e';
 SELECT *
 FROM employees
 WHERE hire_date LIKE '199%' AND birth_date LIKE '%-12-25'
-ORDER BY birth_date LIKE '%-12-25' ASC, hire_date DESC ;
+ORDER BY birth_date ASC , hire_date DESC
+LIMIT 5 OFFSET 45;
 
 SELECT *
 FROM employees
