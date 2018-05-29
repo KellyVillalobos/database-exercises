@@ -24,11 +24,11 @@ ORDER BY dept_name;
 
 SELECT
   title    AS 'Title',
-  count(*) AS 'Count'
+  count(t.emp_no) AS 'Count'
 FROM employees.titles AS t
   JOIN employees.dept_emp AS de ON t.emp_no = de.emp_no
   JOIN employees.departments AS d2 ON de.dept_no = d2.dept_no
-WHERE dept_name = 'Customer Service' AND t.to_date = '9999-01-01'
+WHERE dept_name = 'Customer Service' and de.to_date = '9999-01-01' AND t.to_date = '9999-01-01'
 GROUP BY title;
 
 --CURRENT SALARY OF ALL CURRENT MANAGERS
