@@ -45,41 +45,50 @@ WHERE dm.to_date = '9999-01-01' AND employees.salaries.to_date = '9999-01-01';
 
 --BONUS
 
-SELECT
-  CONCAT(e.first_name, ' ', e.last_name) AS 'Employee Name',
-  d.dept_name                            AS 'Department Name'
-FROM employees.employees AS e
-  JOIN employees.dept_emp AS de ON e.emp_no = de.emp_no
-  JOIN employees.departments AS d ON de.dept_no = d.dept_no
-WHERE de.to_date = '9999-01-01';
-
-
-
-
-SELECT concat(e.first_name, ' ', e.last_name) AS 'Manager Name',
-  dept_name AS 'Department Name'
-FROM employees.employees AS e
-  JOIN employees.dept_manager AS dm ON e.emp_no = dm.emp_no
-  join employees.departments as d on dm.dept_no = d.dept_no
-WHERE dm.to_date = '9999-01-01';
-
-
-
 
 SELECT
-  CONCAT(e.first_name, ' ', e.last_name) AS 'Employee Name',
-  d.dept_name                            AS 'Department Name',
-  CONCAT(e2.first_name, ' ',e2.last_name) AS 'Manager'
+  CONCAT(e.first_name, ' ', e.last_name)   AS 'Employee Name',
+  d.dept_name                              AS 'Department Name',
+  CONCAT(e2.first_name, ' ', e2.last_name) AS 'Manager'
 FROM employees.employees AS e
   JOIN employees.dept_emp AS de ON e.emp_no = de.emp_no
   JOIN employees.departments AS d ON de.dept_no = d.dept_no
   JOIN employees.dept_manager AS dm ON d.dept_no = dm.dept_no
   JOIN employees.employees AS e2 ON dm.emp_no = e2.emp_no
-WHERE de.to_date = '9999-01-01' AND dm.to_date = '9999-01-01';
+WHERE de.to_date = '9999-01-01' AND dm.to_date = '9999-01-01'
+ORDER BY dept_name
+LIMIT 20;
 
+--SLACK BONUS
 
+--AVERAGE SALARIES FOR MALE AND FEMALE
 
+SELECT
+  avg(salary) AS 'Average Salary',
+  e.gender    AS 'Gender'
+FROM employees.employees AS e
+  JOIN employees.salaries AS average ON e.emp_no = average.emp_no
+WHERE average.to_date = '9999-01-01'
+GROUP BY e.gender;
 
+--HISTORICAL SALARY AVERAGES FOR MALE AND FEMALE
+
+SELECT
+  avg(salary) AS 'Average Salary',
+  e.gender    AS 'Gender'
+FROM employees.employees AS e
+  JOIN employees.salaries AS average ON e.emp_no = average.emp_no
+GROUP BY e.gender;
+
+-- CURRENT AVERAGE SALARIES OF MANAGERS BY GENDER
+SELECT
+  avg(salary.emp_no)      AS 'Department Manager',
+  e.gender                  AS 'Gender'
+FROM employees.employees AS e
+  JOIN employees.dept_manager AS dm ON e.emp_no = dm.emp_no
+  JOIN employees.salaries as salary ON e.emp_no = salary.emp_no
+  WHERE dm.to_date = '9999-01-01'
+GROUP BY e.gender;
 
 
 
@@ -98,7 +107,7 @@ WHERE de.to_date = '9999-01-01' AND dm.to_date = '9999-01-01';
 -- WHERE de.to_date = '9999-01-01';
 
 
-DESCRIBE                              departments;
+DESCRIBE departments;
 
 Describe dept_manager;
 
