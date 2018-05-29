@@ -43,7 +43,8 @@ FROM employees.departments AS d
   JOIN employees.employees ON employees.emp_no = dm.emp_no
   JOIN employees.salaries ON employees.emp_no = salaries.emp_no
 
-WHERE dm.to_date = '9999-01-01' AND employees.salaries.to_date = '9999-01-01';
+WHERE dm.to_date = '9999-01-01' AND employees.salaries.to_date = '9999-01-01'
+order by dept_name;
 
 --BONUS
 
