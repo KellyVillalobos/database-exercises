@@ -90,6 +90,16 @@ FROM employees.employees AS e
   WHERE dm.to_date = '9999-01-01'
 GROUP BY e.gender;
 
+--HISTORIC AVERAGE SALARY OF ALL MANAGERS BY GENDER
+
+SELECT
+  avg(salary.emp_no)      AS 'Department Manager',
+  e.gender                  AS 'Gender'
+FROM employees.employees AS e
+  JOIN employees.dept_manager AS dm ON e.emp_no = dm.emp_no
+  JOIN employees.salaries as salary ON e.emp_no = salary.emp_no
+GROUP BY e.gender;
+
 
 
 -- SELECT
